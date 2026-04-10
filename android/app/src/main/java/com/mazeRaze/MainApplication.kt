@@ -1,4 +1,4 @@
-package com.vocabmania
+package com.mazeRaze
 
 import android.app.Application
 import com.facebook.react.PackageList

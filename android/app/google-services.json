@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "213416807161",
+    "project_id": "mazeraze-6df6e",
+    "storage_bucket": "mazeraze-6df6e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213416807161:android:926e573221a41d8cdef028",
+        "android_client_info": {
+          "package_name": "com.mazeRaze"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMF-zGhx7S_u-ntaG8W0D--Iq26IBaGmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

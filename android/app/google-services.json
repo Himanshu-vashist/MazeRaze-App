@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "213416807161",
-    "project_id": "mazeraze-6df6e",
-    "storage_bucket": "mazeraze-6df6e.firebasestorage.app"
+    "project_number": "356060758438",
+    "project_id": "hrithik-41b9b",
+    "storage_bucket": "hrithik-41b9b.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:213416807161:android:926e573221a41d8cdef028",
+        "mobilesdk_app_id": "1:356060758438:android:50e306f181d7f5767ecf67",
         "android_client_info": {
           "package_name": "com.mazeRaze"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "356060758438-2oooot3ep7k5q37s7ou0aj36lu97p64t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCMF-zGhx7S_u-ntaG8W0D--Iq26IBaGmk"
+          "current_key": "AIzaSyAZtuUQ-lskMEj2wg39xhLI50-KdTVp4qc"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356060758438-2oooot3ep7k5q37s7ou0aj36lu97p64t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

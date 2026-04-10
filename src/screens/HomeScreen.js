@@ -10,8 +10,11 @@ import {
   Alert,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { colors } from '../theme/colors';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const HomeScreen = ({ navigation }) => {
   const handleLogout = async () => {
@@ -22,70 +25,162 @@ const HomeScreen = ({ navigation }) => {
     }
   };
 
+  const stats = [
+    { value: '50K+', label: 'Questions' },
+    { value: '95%', label: 'Success Rate' },
+    { value: '10+', label: 'Exams Covered' },
+  ];
+
+  const features = [
+    { icon: 'nintendo-game-boy', title: 'Learn Like Playing', desc: 'Turn boring study sessions into exciting quests with XP, levels, and rewards.' },
+    { icon: 'robot-outline', title: 'AI-Powered Paths', desc: 'Our Oracle analyzes your performance and creates personalized learning journeys.' },
+    { icon: 'book-open-variant', title: 'Exam-Focused', desc: 'Content mapped to SSC, Banking, CAT, UPSC, and more competitive exams.' },
+    { icon: 'chart-line-variant', title: 'Track Everything', desc: 'Detailed analytics show exactly where you excel and where to improve.' },
+    { icon: 'sword-cross', title: 'Compete & Grow', desc: 'Weekly battles, leaderboards, and achievements keep you motivated.' },
+    { icon: 'calendar-check', title: 'Daily Habits', desc: 'Streaks and daily sparks build the consistency that leads to success.' },
+  ];
+
+  const exams = [
+    'SSC CGL', 'SSC CHSL', 'Bank PO', 'Bank Clerk', 
+    'IBPS PO', 'RBI Grade B', 'CAT', 'XAT', 
+    'UPSC Prelims', 'State PSC', 'Railways', 'CTET'
+  ];
+
+  const journeySteps = [
+    { num: '01', title: 'Choose Your Path', desc: 'Select your target exam and subjects. Our Oracle creates a personalized roadmap.' },
+    { num: '02', title: 'Learn & Practice', desc: 'Journey through concepts via Atlas, then test yourself in the Arena.' },
+    { num: '03', title: 'Build Habits', desc: 'Complete Daily Sparks, maintain streaks, and earn XP for consistency.' },
+    { num: '04', title: 'Track & Improve', desc: 'Mission Control shows your progress, strengths, and areas to focus on.' },
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Header Section */}
-        <View style={styles.header}>
-          <View>
-            <Text style={styles.welcomeText}>Welcome back,</Text>
-            <Text style={styles.brandTitle}>MazeRaze</Text>
-          </View>
-          <TouchableOpacity onPress={handleLogout} style={styles.logoutBtn}>
-            <Text style={styles.logoutText}>Log Out</Text>
-          </TouchableOpacity>
-        </View>
+      {/* Decorative Gradient Background Orbs */}
+      <View style={[styles.glowOrb, { top: -80, left: -80, backgroundColor: colors.primary }]} />
+      <View style={[styles.glowOrb, { top: height * 0.4, right: -100, backgroundColor: colors.accent }]} />
+      <View style={[styles.glowOrb, { bottom: -100, left: 50, backgroundColor: colors.error }]} />
 
-        {/* Stats Summary */}
-        <View style={styles.statsGrid}>
-          <View style={styles.statCard}>
-            <Text style={styles.statValue}>85%</Text>
-            <Text style={styles.statLabel}>Accuracy</Text>
-          </View>
-          <View style={styles.statCard}>
-            <Text style={styles.statValue}>12</Text>
-            <Text style={styles.statLabel}>Day Streak</Text>
-          </View>
+      {/* Top Navbar */}
+      <View style={styles.header}>
+        <View style={styles.navBrandContainer}>
+          <Icon name="maze" size={28} color={colors.primaryLight} style={{ marginRight: 8 }} />
+          <Text style={styles.navBrand}>MazeRaze</Text>
         </View>
+        <TouchableOpacity onPress={handleLogout} style={styles.logoutBtn}>
+          <Icon name="logout" size={22} color={colors.textSecondary} />
+        </TouchableOpacity>
+      </View>
 
-        {/* Feature Cards */}
-        <Text style={styles.sectionTitle}>Continue Learning</Text>
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
-        <TouchableOpacity
-          style={styles.mainFeatureCard}
-          onPress={() => navigation.navigate('MemoryVault')}
-        >
-          <View style={styles.featureIconContainer}>
-            <Text style={styles.featureEmoji}>💎</Text>
+        {/* HERO SECTION */}
+        <View style={styles.heroSection}>
+          <View style={styles.badgeContainer}>
+            <Text style={styles.badgeText}>✨ Your journey to excellence starts here</Text>
           </View>
-          <View style={styles.featureInfo}>
-            <Text style={styles.featureTitle}>Memory Vault</Text>
-            <Text style={styles.featureDescription}>Master 45 new words today</Text>
-            <View style={styles.progressBarBackground}>
-              <View style={[styles.progressBarFill, { width: '40%' }]} />
+          
+          <Text style={styles.heroTitle}>Master Aptitude.</Text>
+          <Text style={[styles.heroTitle, { color: colors.primaryLight, marginBottom: 16 }]}>Dominate Exams.</Text>
+          
+          <Text style={styles.heroDesc}>
+            The gamified platform that transforms competitive exam prep into an addictive journey. Learn smarter, track progress, and conquer your goals.
+          </Text>
+
+          <View style={styles.heroBtns}>
+            <TouchableOpacity style={styles.primaryBtn} onPress={() => navigation.navigate('MemoryVault')} activeOpacity={0.8}>
+              <LinearGradient colors={colors.primaryGradient} style={styles.btnGradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                <Text style={styles.primaryBtnText}>Start Your Quest</Text>
+                <Icon name="arrow-right" size={20} color="#FFF" style={{ marginLeft: 8 }} />
+              </LinearGradient>
+            </TouchableOpacity>
+            
+            <TouchableOpacity style={styles.secondaryBtn} activeOpacity={0.7}>
+              <Icon name="play-circle-outline" size={22} color={colors.textPrimary} style={{ marginRight: 8 }} />
+              <Text style={styles.secondaryBtnText}>Watch Demo</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* STATS SECTION */}
+        <View style={styles.statsSection}>
+          <View style={styles.statsGlass}>
+            {stats.map((stat, idx) => (
+              <View key={idx} style={styles.statBox}>
+                <Text style={styles.statValue}>{stat.value}</Text>
+                <Text style={styles.statLabel}>{stat.label}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* WHY CHOOSE MAZERAZE */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Why Choose MazeRaze?</Text>
+          <Text style={styles.sectionSubtitle}>We've reimagined exam preparation as an adventure, not a chore.</Text>
+        </View>
+        
+        <View style={styles.featuresGrid}>
+          {features.map((item, index) => (
+            <View key={index} style={styles.featureCard}>
+              <View style={styles.iconWrapper}>
+                <Icon name={item.icon} size={28} color={colors.primaryLight} />
+              </View>
+              <Text style={styles.featureCardTitle}>{item.title}</Text>
+              <Text style={styles.featureCardDesc}>{item.desc}</Text>
             </View>
-          </View>
-        </TouchableOpacity>
+          ))}
+        </View>
 
-        <TouchableOpacity style={styles.secondaryFeatureCard}>
-          <View style={[styles.miniIcon, { backgroundColor: '#10B981' }]}>
-            <Text style={styles.miniEmoji}>⚡</Text>
-          </View>
-          <View style={styles.flex1}>
-            <Text style={styles.featureTitle}>Daily Challenge</Text>
-            <Text style={styles.featureDescription}>Quick 5-minute session</Text>
-          </View>
-        </TouchableOpacity>
+        {/* EXAMS WE COVER */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Exams We Cover</Text>
+          <Text style={styles.sectionSubtitle}>Comprehensive content tailored for India's top competitive examinations.</Text>
+        </View>
+        
+        <View style={styles.examsWrap}>
+          {exams.map((exam, idx) => (
+            <View key={idx} style={styles.examChip}>
+              <Text style={styles.examText}>{exam}</Text>
+            </View>
+          ))}
+        </View>
 
-        <TouchableOpacity style={styles.secondaryFeatureCard}>
-          <View style={[styles.miniIcon, { backgroundColor: '#F59E0B' }]}>
-            <Text style={styles.miniEmoji}>📊</Text>
-          </View>
-          <View style={styles.flex1}>
-            <Text style={styles.featureTitle}>Insights</Text>
-            <Text style={styles.featureDescription}>View your learning progress</Text>
-          </View>
-        </TouchableOpacity>
+        {/* YOUR JOURNEY */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Your Journey to Success</Text>
+          <Text style={styles.sectionSubtitle}>A simple, proven system that works.</Text>
+        </View>
+        
+        <View style={styles.journeyContainer}>
+          {journeySteps.map((step, index) => (
+            <View key={index} style={styles.journeyStep}>
+              <View style={styles.journeyNumContainer}>
+                <Text style={styles.journeyNum}>{step.num}</Text>
+              </View>
+              <View style={styles.journeyContent}>
+                <Text style={styles.journeyTitle}>{step.title}</Text>
+                <Text style={styles.journeyDesc}>{step.desc}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+
+        {/* CTA FOOTER */}
+        <View style={styles.ctaSection}>
+          <LinearGradient colors={colors.darkGradient} style={styles.ctaGlass} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
+            <Text style={styles.ctaSubtitle}>Join 10,000+ successful aspirants</Text>
+            <Text style={styles.ctaTitle}>Ready to Transform Your{'\n'}Exam Preparation?</Text>
+            
+            <TouchableOpacity style={styles.ctaBtn} onPress={() => navigation.navigate('MemoryVault')} activeOpacity={0.8}>
+              <LinearGradient colors={colors.primaryGradient} style={styles.btnGradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                <Text style={styles.primaryBtnText}>Launch Your Quest</Text>
+                <Icon name="rocket-launch" size={20} color="#FFF" style={{ marginLeft: 8 }} />
+              </LinearGradient>
+            </TouchableOpacity>
+          </LinearGradient>
+        </View>
+
+        <View style={{height: 40}} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -94,144 +189,293 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F0F1A',
+    backgroundColor: '#0A0A12', // Slightly deeper black than old #0F0F1A
   },
-  scrollContent: {
-    padding: 24,
+  glowOrb: {
+    position: 'absolute',
+    width: 250,
+    height: 250,
+    borderRadius: 125,
+    opacity: 0.1,
+    transform: [{ scale: 1.5 }],
+    filter: 'blur(40px)',   
   },
   header: {
-    marginBottom: 32,
-    marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    zIndex: 10,
+    backgroundColor: 'rgba(10, 10, 18, 0.8)',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
   },
-  welcomeText: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.5)',
-    fontWeight: '600',
-    marginBottom: 4,
+  navBrandContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  brandTitle: {
-    fontSize: 34,
+  navBrand: {
+    fontSize: 22,
     fontWeight: '800',
-    color: '#FFFFFF',
+    color: '#FFF',
     letterSpacing: -0.5,
   },
   logoutBtn: {
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    padding: 8,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: 40,
+  },
+  heroSection: {
+    paddingHorizontal: 24,
+    paddingTop: 48,
+    paddingBottom: 40,
+    alignItems: 'flex-start',
+  },
+  badgeContainer: {
+    backgroundColor: 'rgba(99, 102, 241, 0.15)',
     paddingHorizontal: 16,
     paddingVertical: 8,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(239, 68, 68, 0.2)',
-  },
-  logoutText: {
-    color: '#EF4444',
-    fontSize: 14,
-    fontWeight: '700',
-  },
-  statsGrid: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 40,
-  },
-  statCard: {
-    width: (width - 64) / 2,
-    backgroundColor: '#1E1E2E',
     borderRadius: 20,
-    padding: 20,
+    marginBottom: 24,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.05)',
+    borderColor: 'rgba(99, 102, 241, 0.3)',
+  },
+  badgeText: {
+    color: colors.primaryLight,
+    fontWeight: '600',
+    fontSize: 13,
+  },
+  heroTitle: {
+    fontSize: 48,
+    fontWeight: '900',
+    color: '#FFF',
+    lineHeight: 52,
+    letterSpacing: -1,
+  },
+  heroDesc: {
+    fontSize: 16,
+    color: colors.textSecondary,
+    lineHeight: 24,
+    marginBottom: 32,
+    fontWeight: '400',
+  },
+  heroBtns: {
+    flexDirection: 'column',
+    width: '100%',
+    gap: 16,
+  },
+  primaryBtn: {
+    height: 56,
+    borderRadius: 16,
+    overflow: 'hidden',
+    width: '100%',
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.4,
+    shadowRadius: 12,
+    elevation: 8,
+  },
+  btnGradient: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+  },
+  primaryBtnText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '700',
+    letterSpacing: 0.5,
+  },
+  secondaryBtn: {
+    height: 56,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+  },
+  secondaryBtnText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  statsSection: {
+    paddingHorizontal: 16,
+    marginBottom: 48,
+  },
+  statsGlass: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    backgroundColor: 'rgba(30, 30, 46, 0.6)',
+    borderRadius: 24,
+    paddingVertical: 24,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+  },
+  statBox: {
+    alignItems: 'center',
   },
   statValue: {
     fontSize: 24,
-    fontWeight: '800',
-    color: '#6366F1',
+    fontWeight: '900',
+    color: colors.primaryLight,
     marginBottom: 4,
   },
   statLabel: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.4)',
-    fontWeight: '700',
+    color: colors.textMuted,
     textTransform: 'uppercase',
+    fontWeight: '700',
     letterSpacing: 1,
   },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#FFFFFF',
-    marginBottom: 20,
+  sectionHeader: {
+    paddingHorizontal: 24,
+    marginBottom: 24,
+    marginTop: 16,
   },
-  mainFeatureCard: {
-    backgroundColor: '#1E1E2E',
+  sectionTitle: {
+    fontSize: 32,
+    fontWeight: '800',
+    color: '#FFF',
+    marginBottom: 8,
+    letterSpacing: -0.5,
+  },
+  sectionSubtitle: {
+    fontSize: 15,
+    color: colors.textSecondary,
+    lineHeight: 22,
+  },
+  featuresGrid: {
+    paddingHorizontal: 24,
+    flexDirection: 'column',
+    gap: 16,
+    marginBottom: 48,
+  },
+  featureCard: {
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
     borderRadius: 24,
     padding: 24,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-  },
-  featureIconContainer: {
-    width: 64,
-    height: 64,
-    borderRadius: 20,
-    backgroundColor: 'rgba(99, 102, 241, 0.1)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 20,
-  },
-  featureEmoji: {
-    fontSize: 32,
-  },
-  featureInfo: {
-    flex: 1,
-  },
-  featureTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#FFFFFF',
-    marginBottom: 4,
-  },
-  featureDescription: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.5)',
-    marginBottom: 12,
-  },
-  progressBarBackground: {
-    height: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 2,
-    overflow: 'hidden',
-  },
-  progressBarFill: {
-    height: '100%',
-    backgroundColor: '#6366F1',
-  },
-  secondaryFeatureCard: {
-    backgroundColor: '#1E1E2E',
-    borderRadius: 20,
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.05)',
   },
-  miniIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 14,
+  iconWrapper: {
+    width: 56,
+    height: 56,
+    borderRadius: 16,
+    backgroundColor: 'rgba(99, 102, 241, 0.1)',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginBottom: 16,
   },
-  miniEmoji: {
+  featureCardTitle: {
     fontSize: 20,
+    fontWeight: '700',
+    color: '#FFF',
+    marginBottom: 8,
   },
-  flex1: {
+  featureCardDesc: {
+    fontSize: 14,
+    color: colors.textSecondary,
+    lineHeight: 22,
+  },
+  examsWrap: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: 20,
+    marginBottom: 48,
+    gap: 12,
+    justifyContent: 'center',
+  },
+  examChip: {
+    backgroundColor: 'rgba(99, 102, 241, 0.08)',
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: 'rgba(99, 102, 241, 0.2)',
+  },
+  examText: {
+    color: colors.primaryLight,
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  journeyContainer: {
+    paddingHorizontal: 24,
+    marginBottom: 48,
+  },
+  journeyStep: {
+    flexDirection: 'row',
+    marginBottom: 24,
+  },
+  journeyNumContainer: {
+    marginRight: 20,
+    alignItems: 'center',
+  },
+  journeyNum: {
+    fontSize: 28,
+    fontWeight: '900',
+    color: 'rgba(255, 255, 255, 0.15)',
+    fontStyle: 'italic',
+  },
+  journeyContent: {
     flex: 1,
+    paddingTop: 6,
+  },
+  journeyTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#FFF',
+    marginBottom: 8,
+  },
+  journeyDesc: {
+    fontSize: 14,
+    color: colors.textSecondary,
+    lineHeight: 22,
+  },
+  ctaSection: {
+    paddingHorizontal: 16,
+    marginTop: 24,
+  },
+  ctaGlass: {
+    borderRadius: 24,
+    padding: 32,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  ctaSubtitle: {
+    color: colors.primaryLight,
+    fontWeight: '700',
+    fontSize: 13,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: 12,
+  },
+  ctaTitle: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: '#FFF',
+    textAlign: 'center',
+    marginBottom: 32,
+    lineHeight: 36,
+  },
+  ctaBtn: {
+    height: 56,
+    borderRadius: 16,
+    overflow: 'hidden',
+    width: '100%',
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.5,
+    shadowRadius: 16,
+    elevation: 8,
   },
 });
 
